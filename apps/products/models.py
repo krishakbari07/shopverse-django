@@ -1,5 +1,6 @@
 from django.utils.text import slugify
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
 
@@ -18,7 +19,7 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-    
+
 
 class Product(models.Model):
     category = models.ForeignKey(
@@ -46,4 +47,5 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
 

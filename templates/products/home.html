@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+
+<div class="p-5 mb-4 bg-light rounded-3">
+
+    <div class="container-fluid py-5">
+
+        <h1 class="display-5 fw-bold">
+            Welcome to ShopVerse
+        </h1>
+
+        <p class="fs-4">
+            Discover amazing products at great prices.
+        </p>
+
+        <button class="btn btn-primary btn-lg">
+            Shop Now
+        </button>
+
+    </div>
+
+</div>
+<hr class="my-5">
+
+<h2 class="mb-4">Latest Products</h2>
+
+<div class="row">
+
+    {% for product in products %}
+
+    <div class="col-md-3 mb-4">
+
+        <div class="card h-100">
+
+            {% if product.image %}
+                <img src="{{ product.image.url }}"
+                     class="card-img-top"
+                     height="280px; object-fit: cover;">
+            {% endif %}
+
+            <div class="card-body h-100 shadow-sm">
+
+                <h5 class="card-title">
+                    {{ product.name }}
+                </h5>
+
+                <p class="card-text">
+                    ₹ {{ product.price }}
+                </p>
+
+                <a href="{% url 'product_detail' product.slug %}"
+                   class="btn btn-primary">
+                    View Product
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+{% endblock %}

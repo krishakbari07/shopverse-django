@@ -1,0 +1,82 @@
+{% extends 'base.html' %} {% block content %}
+
+<h2>My Cart</h2>
+
+{% for item in cart_items %}
+
+<div class="card mb-3">
+    <div class="card-body">
+
+        <div class="row align-items-center">
+
+            <div class="col-md-2">
+
+                {% if item.product.image %}
+                <img src="{{ item.product.image.url }}"
+                     class="img-fluid rounded"
+                     style="height:100px;width:100px;object-fit:cover;">
+                {% endif %}
+
+            </div>
+
+            <div class="col-md-6">
+
+                <h5>{{ item.product.name }}</h5>
+
+                <p class="mb-1">
+                    ₹ {{ item.product.price }}
+                </p>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <a href="{% url 'decrease_cart' item.id %}"
+                   class="btn btn-warning btn-sm">
+                   -
+                </a>
+
+                <span class="mx-2">
+                    {{ item.quantity }}
+                </span>
+
+                <a href="{% url 'increase_cart' item.id %}"
+                   class="btn btn-success btn-sm">
+                   +
+                </a>
+
+                <a href="{% url 'remove_cart' item.id %}"
+                   class="btn btn-danger btn-sm">
+                   Remove
+                </a>
+
+                <div class="mt-2">
+                    <strong>
+                        Total:
+                        ₹ {{ item.total_price }}
+                    </strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+{% empty %}
+<h4>Your cart is empty.</h4>
+
+{% endfor %}
+<hr>
+
+<div class="text-end">
+
+    <h3>
+        Grand Total:
+        ₹ {{ total }}
+    </h3>
+
+</div>
+
+
+{% endblock %}
